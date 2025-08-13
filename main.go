@@ -6,8 +6,11 @@ import (
 	"os/signal"
 	"syscall"
 
+	bot "github.com/Chris-Kellett/uma-discord-bot/Bot"
 	config "github.com/Chris-Kellett/uma-discord-bot/Config"
 	logger "github.com/Chris-Kellett/uma-discord-bot/Logger"
+	ping "github.com/Chris-Kellett/uma-discord-bot/Ping"
+	umacache "github.com/Chris-Kellett/uma-discord-bot/UmaCache"
 )
 
 func main() {
@@ -16,12 +19,15 @@ func main() {
 	config.Init()
 	logger.Init()
 	logger.Event("CONFIG", "Config initialisation successful, Session ID: %s", config.APP_SESSIONID)
+	umacache.Init()
+	go ping.Init()
+	go bot.Init()
 	<-osSignal
 	stop()
 }
 func stop() {
 	logger.Info("MAIN", "OS Quit signal received, bot stopping...")
-
+	logger.Stop <- true
 	fmt.Println("Bot gracefully stopped...")
-	os.Exit(1)
+	os.Exit(0)
 }

@@ -20,8 +20,8 @@ type LogRequest struct {
 }
 
 var (
-	queue chan (LogRequest) = make(chan LogRequest)
-	Stop  chan (bool)       = make(chan bool)
+	queue chan (LogRequest)  = make(chan LogRequest)
+	Stop  chan (interface{}) = make(chan interface{})
 )
 
 func Init() {
@@ -81,7 +81,6 @@ func getStack() string {
 		buf = make([]byte, len(buf)*2)
 	}
 }
-
 func parseStackTrace(stack string) string {
 	retVal := ""
 	lines := strings.Split(stack, "\n")
@@ -118,7 +117,7 @@ func parseStackTrace(stack string) string {
 		}
 	}
 
-	return "./" + removeTextInParentheses(retVal)
+	return strings.ReplaceAll("./"+removeTextInParentheses(retVal), "//", "/")
 }
 
 func removeTextInParentheses(input string) string {
