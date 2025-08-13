@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/bwmarrin/discordgo"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 )
@@ -22,6 +23,7 @@ var (
 
 	// DISCORD_x - relate to interaction with discord
 	DISCORD_BOTTOKEN string
+	DISCORD_SESSION  *discordgo.Session
 
 	// DB_x - relate to the database
 	DB_IPADDRESS string
