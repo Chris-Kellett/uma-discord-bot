@@ -11,9 +11,6 @@ import (
 type Command interface {
 	Command() *discordgo.ApplicationCommand
 	Handler(*discordgo.InteractionCreate, string)
-	Complexity() int
-	RequiresRepliedMessage() bool
-	RequiresRepliedMsgToBeImg() bool
 }
 
 var (
@@ -21,7 +18,7 @@ var (
 )
 
 func Init() bool {
-
+	Commands[UmaInfo{}.Command().Name] = UmaInfo{}
 	err := resetAndRegisterCommands()
 	return err == nil
 }

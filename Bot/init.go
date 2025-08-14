@@ -2,12 +2,14 @@ package bot
 
 import (
 	"fmt"
+	"time"
 
 	commands "github.com/Chris-Kellett/uma-discord-bot/Commands"
 	config "github.com/Chris-Kellett/uma-discord-bot/Config"
+	datasets "github.com/Chris-Kellett/uma-discord-bot/Datasets"
 	logger "github.com/Chris-Kellett/uma-discord-bot/Logger"
-	umacache "github.com/Chris-Kellett/uma-discord-bot/UmaCache"
 	"github.com/bwmarrin/discordgo"
+	"github.com/google/uuid"
 )
 
 func Init() {
@@ -34,7 +36,7 @@ func Init() {
 	}
 
 	logger.Info("BOTINIT", "Discord session opened")
-	umacache.OutputCache()
+	go worker()
 }
 
 func sessionInit() bool {
@@ -73,7 +75,11 @@ func addHandlers() bool {
 }
 
 func newInteractionCreate(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
-
+	queue <- &datasets.Request{
+		Interaction:   interaction,
+		CorrelationID: uuid.NewString(),
+		TimeStart:     time.Now(),
+	}
 }
 
 func newGuild(session *discordgo.Session, newGuild *discordgo.GuildCreate) {
