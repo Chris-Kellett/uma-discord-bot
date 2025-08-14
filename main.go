@@ -27,6 +27,7 @@ func main() {
 }
 func stop() {
 	logger.Info("MAIN", "OS Quit signal received, bot stopping...")
+	bot.Stop <- true
 	logger.Stop <- true
 	fmt.Println("Bot gracefully stopped...")
 	os.Exit(0)
