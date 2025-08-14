@@ -2,6 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "free-port-3333",
+            "type": "shell",
+            "command": "fuser -k 3333/tcp || true",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
             "label": "build",
             "type": "shell",
             "command": "go",
@@ -19,6 +30,14 @@
                 "focus": false,
                 "panel": "shared"
             }
+        },
+        {
+            "label": "pre-debug",
+            "dependsOn": [
+                "free-port-3333",
+                "build"
+            ],
+            "dependsOrder": "sequence"
         }
     ]
 }

@@ -6,21 +6,28 @@ import (
 	datasets "github.com/Chris-Kellett/uma-discord-bot/Datasets"
 )
 
-// Card Data
+// Characters
 var (
-	cardData   map[int]datasets.CardData = make(map[int]datasets.CardData)
-	cardDataMu sync.RWMutex
+	characters   map[int]datasets.Character = make(map[int]datasets.Character)
+	charactersMu sync.RWMutex
 )
 
-func GetCardData(cardId int) (datasets.CardData, bool) {
-	cardDataMu.RLock()
-	val, ok := cardData[cardId]
-	cardDataMu.RUnlock()
+func Character(characterId int) (datasets.Character, bool) {
+	charactersMu.RLock()
+	val, ok := characters[characterId]
+	charactersMu.RUnlock()
 	return val, ok
 }
 
-func SetCardData(data datasets.CardData) {
-	cardDataMu.Lock()
-	cardData[data.ID] = data
-	cardDataMu.Unlock()
+// Support Cards
+var (
+	supportCards   map[int]datasets.SupportCard = make(map[int]datasets.SupportCard)
+	supportCardsMu sync.RWMutex
+)
+
+func Card(cardId int) (datasets.SupportCard, bool) {
+	supportCardsMu.RLock()
+	val, ok := supportCards[cardId]
+	supportCardsMu.RUnlock()
+	return val, ok
 }
