@@ -81,6 +81,7 @@ func getStack() string {
 		buf = make([]byte, len(buf)*2)
 	}
 }
+
 func parseStackTrace(stack string) string {
 	retVal := ""
 	lines := strings.Split(stack, "\n")
@@ -106,18 +107,29 @@ func parseStackTrace(stack string) string {
 			lastIndex = strings.LastIndex(line, ")")
 		}
 
+		if !isFileLine {
+			continue
+		}
+
 		if botIndex != -1 && lastIndex != -1 {
+
+			appended := false
 			if isFirst {
 				isFirst = false
 			} else {
-				retVal += " <= "
+				break
 			}
 
 			retVal += line[botIndex+botIndexLength : lastIndex+1]
+
+			if appended {
+				break
+			}
+
 		}
 	}
 
-	return strings.ReplaceAll("./"+removeTextInParentheses(retVal), "//", "/")
+	return "." + removeTextInParentheses(retVal)
 }
 
 func removeTextInParentheses(input string) string {

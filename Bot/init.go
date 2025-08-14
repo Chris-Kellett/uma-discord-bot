@@ -6,6 +6,7 @@ import (
 	commands "github.com/Chris-Kellett/uma-discord-bot/Commands"
 	config "github.com/Chris-Kellett/uma-discord-bot/Config"
 	logger "github.com/Chris-Kellett/uma-discord-bot/Logger"
+	umacache "github.com/Chris-Kellett/uma-discord-bot/UmaCache"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -33,6 +34,7 @@ func Init() {
 	}
 
 	logger.Info("BOTINIT", "Discord session opened")
+	umacache.OutputCache()
 }
 
 func sessionInit() bool {
