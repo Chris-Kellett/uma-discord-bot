@@ -3,6 +3,7 @@ package bot
 import (
 	"time"
 
+	requests "github.com/Chris-Kellett/uma-discord-bot/Cache/Requests"
 	commands "github.com/Chris-Kellett/uma-discord-bot/Commands"
 	datasets "github.com/Chris-Kellett/uma-discord-bot/Datasets"
 	helpers "github.com/Chris-Kellett/uma-discord-bot/Helpers"
@@ -32,6 +33,7 @@ func handleItem(request *datasets.Request) {
 	cmdName := request.Interaction.ApplicationCommandData().Name
 	if cmd, exists := commands.Commands[cmdName]; exists {
 		go func(c commands.Command, r *datasets.Request) {
+			requests.Add(r.Interaction, cmdName, r.CorrelationID)
 			c.Handler(r.Interaction, r.CorrelationID)
 			logger.Event(request.Interaction.GuildID, "Request: %s completed after %s",
 				r.CorrelationID, helpers.GetNiceCommandDuration(time.Since(r.TimeStart)))

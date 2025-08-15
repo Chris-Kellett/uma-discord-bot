@@ -31,6 +31,11 @@ var (
 	DB_USER      string
 	DB_PASSWORD  string
 	DB_PORT      string
+
+	// From here: https://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812
+	EmbedColourGold  = 15844367
+	EmbedColourRed   = 15548997
+	EmbedColourGreen = 5763719
 )
 
 func Init() {
@@ -96,31 +101,6 @@ func parseEnvVariables() error {
 	DISCORD_BOTTOKEN = os.Getenv("DISCORD_BOTTOKEN")
 	if DISCORD_BOTTOKEN == "" {
 		return fmt.Errorf("%s%s", notFoundText, "DISCORD_BOTTOKEN")
-	}
-
-	DB_IPADDRESS = os.Getenv("DB_IPADDRESS")
-	if DB_IPADDRESS == "" {
-		return fmt.Errorf("%s%s", notFoundText, "DB_IPADDRESS")
-	}
-
-	DB_NAME = os.Getenv("DB_NAME")
-	if DB_NAME == "" {
-		return fmt.Errorf("%s%s", notFoundText, "DB_NAME")
-	}
-
-	DB_USER = os.Getenv("DB_USER")
-	if DB_USER == "" {
-		return fmt.Errorf("%s%s", notFoundText, "DB_USER")
-	}
-
-	DB_PASSWORD = os.Getenv("DB_PASSWORD")
-	if DB_PASSWORD == "" {
-		return fmt.Errorf("%s%s", notFoundText, "DB_PASSWORD")
-	}
-
-	DB_PORT = os.Getenv("DB_PORT")
-	if DB_PORT == "" {
-		return fmt.Errorf("%s%s", notFoundText, "DB_PORT")
 	}
 
 	value = os.Getenv("APP_LOGGINGLEVEL")
