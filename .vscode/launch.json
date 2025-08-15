@@ -7,7 +7,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}",
-            "preLaunchTask": "pre-debug",
+            "preLaunchTask": "build",
             "env": {},
             "args": []
         },

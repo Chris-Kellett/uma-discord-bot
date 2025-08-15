@@ -7,10 +7,10 @@ import (
 	"syscall"
 
 	bot "github.com/Chris-Kellett/uma-discord-bot/Bot"
+	umacache "github.com/Chris-Kellett/uma-discord-bot/Cache/Uma"
 	config "github.com/Chris-Kellett/uma-discord-bot/Config"
 	logger "github.com/Chris-Kellett/uma-discord-bot/Logger"
 	ping "github.com/Chris-Kellett/uma-discord-bot/Ping"
-	umacache "github.com/Chris-Kellett/uma-discord-bot/UmaCache"
 )
 
 func main() {

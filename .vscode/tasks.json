@@ -2,17 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "free-port-3333",
-            "type": "shell",
-            "command": "fuser -k 3333/tcp || true",
-            "presentation": {
-                "echo": true,
-                "reveal": "silent",
-                "focus": false,
-                "panel": "shared"
-            }
-        },
-        {
             "label": "build",
             "type": "shell",
             "command": "go",
@@ -20,7 +9,7 @@
                 "build",
                 "-gcflags=all=-N -l",
                 "-o",
-                "./out/uma-discord-bot",
+                "./out/discgo-bot",
                 "."
             ],
             "group": "build",
@@ -30,14 +19,6 @@
                 "focus": false,
                 "panel": "shared"
             }
-        },
-        {
-            "label": "pre-debug",
-            "dependsOn": [
-                "free-port-3333",
-                "build"
-            ],
-            "dependsOrder": "sequence"
         }
     ]
 }
